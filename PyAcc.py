@@ -4,6 +4,7 @@
 # Created By: Samuel Buzas & Elizabeth Sheetz
 #########
 import datetime
+
 from openpyxl import Workbook
 from openpyxl.compat import range
 from openpyxl.utils import get_column_letter
@@ -16,13 +17,15 @@ def create_workbook(filename = "MyFirstBudget", sheet_name = "SimpleBudget"):
 	dest_filename = filename + '.xlsx'
 	wb.active.title = sheet_name
 	wb.active['A1'] = 'Date'
-	wb.active.column_dimensions['A'].width = 10
+	wb.active.column_dimensions['A'].width = 17
 	wb.active['B1'] = 'Category'
-	wb.active.column_dimensions['B'].width = 10
+	wb.active.column_dimensions['B'].width = 15
 	wb.active['C1'] = 'Amount'
+	wb.active.column_dimensions['C'].width = 10
 	wb.active['D1'] = 'Check Number'
+	wb.active.column_dimensions['D'].width = 17
 	wb.active['E1'] = 'Description'
-	wb.active.column_dimensions['E'].width = 30
+	wb.active.column_dimensions['E'].width = 50
 	wb.geuss_types = True
 	wb.save(filename = dest_filename)
 
@@ -61,7 +64,10 @@ class Transaction:
 		self.entryNumber = 2
 	
 	# Create Entry
-	def createTransaction(self, day= 12, month= 12, year= 12 , category = 'None' , amount = 0.0, checknum = 'None' , desc ='Ex.This was a purcahse'):
+	def createTransaction(self, day = 12, month = 12, year = 1996 , category = 'None' , amount = 0.0, checknum = 'None' , desc ='Ex.This was a purcahse'):
+		# TODO: Load the workbook you want to operate on
+		#TODO: check that your not overwrting previous entries
+
 		sheet = wb.active
 		sheet['A' + str(self.entryNumber)] = datetime.datetime(year, month, day)
 		sheet['A' + str(self.entryNumber)].number_format
@@ -74,6 +80,10 @@ class Transaction:
 		wb.save('MyFirstBudget.xlsx')
 		self.entryNumber += 1
 
-# Edit Entry
+	# # Edit Entries
+	# def updateTransaction_Date(self, entryNumber, day, month, year):
+
+	# def updateTransaction_Category
+
 
 
