@@ -32,7 +32,13 @@ def create_worksheet(sheet_name = "Trackin Sheet", filename = "MyFirstBudget"):
 	wb.create_sheet(sheet_name)
 	wb.save(filename = dest_filename)
 
-# Create Graph Still Needed
+# Create Blank Graph
+def create_table(filename = "MyFirstBudget", sheet_name = "SimpleBudget"):
+	dest_filename = filename + '.xlsx'
+	wb.active.title = sheet_name
+	wb.save(filename = dest_filename)
+
+
 
 class Transaction:
 	
