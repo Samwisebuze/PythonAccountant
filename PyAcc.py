@@ -14,11 +14,11 @@ wb = Workbook()
 def create_workbook(filename = "MyFirstBudget", sheet_name = "SimpleBudget"):
 	dest_filename = filename + '.xlsx'
 	wb.active.title = sheet_name
-	wb.active['A1'] = 'Date'
-	wb.active['B1'] = 'Category'
-	wb.active['C1'] = 'Amount'
-	wb.active['D1'] = 'Check Number'
-	wb.active['E1'] = 'Description'
+	wb.active['B4'] = 'Date'
+	wb.active['C4'] = 'Category'
+	wb.active['D4'] = 'Amount'
+	wb.active['E4'] = 'Check Number'
+	wb.active['F4'] = 'Description'
 	wb.save(filename = dest_filename)
 
 # Create WorkSheet
@@ -27,7 +27,13 @@ def create_worksheet(sheet_name = "Trackin Sheet", filename = "MyFirstBudget"):
 	wb.create_sheet(sheet_name)
 	wb.save(filename = dest_filename)
 
-# Create Graph Still Needed
+# Create Blank Graph
+def create_table(filename = "MyFirstBudget", sheet_name = "SimpleBudget"):
+	dest_filename = filename + '.xlsx'
+	wb.active.title = sheet_name
+	wb.save(filename = dest_filename)
+
+
 
 class Transaction:
 
