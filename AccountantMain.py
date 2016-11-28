@@ -13,6 +13,7 @@ def main():
 	new_worksheetname = input("Enter a worksheet name: ")
 	PyAcc.create_workbook(new_filename, new_worksheetname)
 	print("Open the file and see if it worked.")
+	print("Now create a new transaction, and it will be added to the file.")
 
 
 if __name__ == "__main__":
