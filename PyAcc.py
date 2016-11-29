@@ -33,20 +33,20 @@ def create_workbook(filename = "MyFirstBudget", sheet_name = "SimpleBudget"):
 # Create WorkSheet
 def create_worksheet(sheet_name = "Trackin Sheet", filename = "MyFirstBudget"):
 	dest_filename = filename + '.xlsx'
+	wb = load_workbook(dest_filename)
 	wb.create_sheet(sheet_name)
-	wb.save(filename = dest_filename)
+	wb.save(dest_filename)
 
 # Create Blank Graph
 def create_table(filename = "MyFirstBudget", sheet_name = "SimpleBudget"):
 	dest_filename = filename + '.xlsx'
 	wb.active.title = sheet_name
-	wb.save(filename = dest_filename)
+	wb.save(dest_filename)
 
 
 
 class Transaction:
-	
-	
+
 
 	def __init__(self, Day = 12, Month =12, Year=12 , category = 'None' , amount = 0.0, checknum = 'None' , desc ='Ex. This was a purcahse'):
 		# Date format is Year/Month/Day
@@ -70,6 +70,8 @@ class Transaction:
 		wb = load_workbook('MyFirstBudget.xlsx')
 		# check that your not overwrting previous entries
 		sheet = wb.active
+		#Alawyas start at entry 2, to prevetn massive gaps in the sheet
+		self.entryNumber = 2
 		while sheet['A'+ str(self.entryNumber)].value != None:
 			self.entryNumber += 1
 
@@ -84,10 +86,46 @@ class Transaction:
 		wb.save('MyFirstBudget.xlsx')
 		self.entryNumber += 1
 
-	# # Edit Entries
-	# def updateTransaction_Date(self, entryNumber, day, month, year):
+	# Edit Entries
+	def updateTransaction_Date(self, entryNumber, year, month, day):
+		wb = load_workbook('MyFirstBudget.xlsx')
+		sheet = wb.active
+		self.entryNumber = entryNumber
+		# Update the description
+		sheet['A' + str(self.entryNumber)] = datetime.datetime(year, month, day)
+		sheet['A' + str(self.entryNumber)].number_format
+		wb.geuss_types= True
 
-	# def updateTransaction_Category
+	def updateTransaction_Category(self, entryNumber, day, month, year):
+		wb = load_workbook('MyFirstBudget.xlsx')
+		sheet = wb.active
+		self.entryNumber = entryNumber
+		# Update the description
+		sheet['B' + str(self.entryNumber)] = category
+
+	def updateTransaction_amount(self, entryNumber, amount):
+		wb = load_workbook('MyFirstBudget.xlsx')
+		sheet = wb.active
+		self.entryNumber = entryNumber
+		# Update the description
+		sheet['C' + str(self.entryNumber)] = amount
+
+	def updateTransaction_checknum(self,entryNumber, checknum):
+		wb = load_workbook('MyFirstBudget.xlsx')
+		sheet = wb.active
+		self.entryNumber = entryNumber
+		# Update the description
+		sheet['D' + str(self.entryNumber)] = checknum
+
+	def updateTransaction_desc(self, entryNumber, desc):
+		wb = load_workbook('MyFirstBudget.xlsx')
+		sheet = wb.active
+		self.entryNumber = entryNumber
+		# Update the description
+		sheet['E' + str(self.entryNumber)] = desc
+
+
+
 
 
 
