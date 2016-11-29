@@ -8,6 +8,7 @@ import datetime
 from openpyxl import Workbook
 from openpyxl.compat import range
 from openpyxl.utils import get_column_letter
+from openpyxl import load_workbook
 
 #Constant
 wb = Workbook()
@@ -48,7 +49,7 @@ class Transaction:
 	
 
 	def __init__(self, Day = 12, Month =12, Year=12 , category = 'None' , amount = 0.0, checknum = 'None' , desc ='Ex. This was a purcahse'):
-		# Date format is Month/ Day / Year
+		# Date format is Year/Month/Day
 		self.Day = Day
 		self.Month = Month
 		self.Year = Year
@@ -64,11 +65,14 @@ class Transaction:
 		self.entryNumber = 2
 	
 	# Create Entry
-	def createTransaction(self, day = 12, month = 12, year = 1996 , category = 'None' , amount = 0.0, checknum = 'None' , desc ='Ex.This was a purcahse'):
-		# TODO: Load the workbook you want to operate on
-		#TODO: check that your not overwrting previous entries
-
+	def createTransaction(self,  year = 1996 , month = 12,  day = 12, category = 'None' , amount = 0.0, checknum = 'None' , desc ='Ex.This was a purcahse'):
+		# Load budget workbook to edit
+		wb = load_workbook('MyFirstBudget.xlsx')
+		# check that your not overwrting previous entries
 		sheet = wb.active
+		while sheet['A'+ str(self.entryNumber)].value != None:
+			self.entryNumber += 1
+
 		sheet['A' + str(self.entryNumber)] = datetime.datetime(year, month, day)
 		sheet['A' + str(self.entryNumber)].number_format
 		wb.geuss_types= True
