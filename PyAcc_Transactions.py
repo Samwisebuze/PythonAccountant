@@ -65,9 +65,9 @@ class Transaction:
 		self.entryNumber = 2
 	
 	# Create Entry
-	def createTransaction(self,  year = 1996 , month = 12,  day = 12, category = 'None' , amount = 0.0, checknum = 'None' , desc ='Ex.This was a purcahse'):
+	def createTransaction(self, filename, year = 1996 , month = 12,  day = 12, category = 'None' , amount = 0.0, checknum = 'None' , desc ='Ex.This was a purcahse'):
 		# Load budget workbook to edit
-		wb = load_workbook('MyFirstBudget.xlsx')
+		wb = load_workbook(filename +'.xlsx')
 		# check that your not overwrting previous entries
 		sheet = wb.active
 		#Alawyas start at entry 2, to prevetn massive gaps in the sheet
@@ -83,8 +83,16 @@ class Transaction:
 		sheet['D' + str(self.entryNumber)] = checknum
 		sheet['E' + str(self.entryNumber)] = desc
 
-		wb.save('MyFirstBudget.xlsx')
+		wb.save(filename + '.xlsx')
 		self.entryNumber += 1
+
+	def checkEntries(filename):
+		wb = load_workbook(filename)
+		while sheet['A'+ str(self.entryNumber)].value != None:
+			self.entryNumber += 1
+		return self.entryNumber
+
+
 
 	# Edit Entries
 	def updateTransaction_Date(self, entryNumber, year, month, day):
@@ -96,7 +104,7 @@ class Transaction:
 		sheet['A' + str(self.entryNumber)].number_format
 		wb.geuss_types= True
 
-	def updateTransaction_Category(self, entryNumber, day, month, year):
+	def updateTransaction_Category(self, entryNumber, category):
 		wb = load_workbook('MyFirstBudget.xlsx')
 		sheet = wb.active
 		self.entryNumber = entryNumber
