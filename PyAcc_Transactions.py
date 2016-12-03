@@ -48,28 +48,18 @@ def create_table(filename = "MyFirstBudget", sheet_name = "SimpleBudget"):
 class Transaction:
 
 
-	def __init__(self, Day = 12, Month =12, Year=12 , category = 'None' , amount = 0.0, checknum = 'None' , desc ='Ex. This was a purcahse'):
-		# Date format is Year/Month/Day
-		self.Day = Day
-		self.Month = Month
-		self.Year = Year
-		#Category is used to lable puchases (i.e: Food, Entertainment, Gas, Travel,...etc)
-		self.category = category
-		# The Amount of the transaction
-		self.amount = amount
-		# The Check Number of the transaction, if needed
-		self.checknum = checknum
-		# Short Description of the purpose of the transaction, further defines the transaction with help of category
-		self.desc = desc
+	def __init__(self, workbook = 'Default' ,account_name = 'Default'):
+		self.workbook = workbook + '.xlsx'
+		self.account_name = str(account_name)
 		# excel isnt 0 based and row 1 is for titles
 		self.entryNumber = 2
 	
 	# Create Entry
-	def createTransaction(self, filename, year = 1996 , month = 12,  day = 12, category = 'None' , amount = 0.0, checknum = 'None' , desc ='Ex.This was a purcahse'):
+	def createTransaction(self, year = 1996 , month = 12,  day = 12, category = 'None' , amount = 0.0, checknum = 'None' , desc ='Ex.This was a purcahse'):
 		# Load budget workbook to edit
-		wb = load_workbook(filename +'.xlsx')
+		wb = load_workbook(self.workbook)
 		# check that your not overwrting previous entries
-		sheet = wb.active
+		sheet = wb[self.account_name]
 		#Alawyas start at entry 2, to prevetn massive gaps in the sheet
 		self.entryNumber = 2
 		while sheet['A'+ str(self.entryNumber)].value != None:
@@ -83,11 +73,13 @@ class Transaction:
 		sheet['D' + str(self.entryNumber)] = checknum
 		sheet['E' + str(self.entryNumber)] = desc
 
-		wb.save(filename + '.xlsx')
+		wb.save(self.workbook)
 		self.entryNumber += 1
 
-	def checkEntries(filename):
+	def checkEntries(self,filename,account_name):
 		wb = load_workbook(filename)
+		sheet = wb[account_name]
+		self.entryNumber = 2
 		while sheet['A'+ str(self.entryNumber)].value != None:
 			self.entryNumber += 1
 		return self.entryNumber
@@ -96,41 +88,51 @@ class Transaction:
 
 	# Edit Entries
 	def updateTransaction_Date(self, entryNumber, year, month, day):
-		wb = load_workbook('MyFirstBudget.xlsx')
-		sheet = wb.active
+		wb = load_workbook(self.workbook)
+		sheet = wb.self.account_name
 		self.entryNumber = entryNumber
 		# Update the description
 		sheet['A' + str(self.entryNumber)] = datetime.datetime(year, month, day)
 		sheet['A' + str(self.entryNumber)].number_format
 		wb.geuss_types= True
 
+		wb.save(self.workbook)
+
 	def updateTransaction_Category(self, entryNumber, category):
-		wb = load_workbook('MyFirstBudget.xlsx')
-		sheet = wb.active
+		wb = load_workbook(self.workbook)
+		sheet = wb.self.account_name
 		self.entryNumber = entryNumber
 		# Update the description
 		sheet['B' + str(self.entryNumber)] = category
 
+		wb.save(self.workbook)
+
 	def updateTransaction_amount(self, entryNumber, amount):
-		wb = load_workbook('MyFirstBudget.xlsx')
-		sheet = wb.active
+		wb = load_workbook(self.workbook)
+		sheet = wb.self.account_name
 		self.entryNumber = entryNumber
 		# Update the description
 		sheet['C' + str(self.entryNumber)] = amount
 
+		wb.save(self.workbook)
+
 	def updateTransaction_checknum(self,entryNumber, checknum):
-		wb = load_workbook('MyFirstBudget.xlsx')
-		sheet = wb.active
+		wb = load_workbook(self.workbook)
+		sheet = wb.self.account_name
 		self.entryNumber = entryNumber
 		# Update the description
 		sheet['D' + str(self.entryNumber)] = checknum
 
+		wb.save(self.workbook)
+
 	def updateTransaction_desc(self, entryNumber, desc):
-		wb = load_workbook('MyFirstBudget.xlsx')
-		sheet = wb.active
+		wb = load_workbook(self.workbook)
+		sheet = wb.self.account_name
 		self.entryNumber = entryNumber
 		# Update the description
 		sheet['E' + str(self.entryNumber)] = desc
+
+		wb.save(self.workbook)
 
 
 
