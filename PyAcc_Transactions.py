@@ -89,18 +89,18 @@ class Transaction:
 	# Edit Entries
 	def updateTransaction_Date(self, entryNumber, year, month, day):
 		wb = load_workbook(self.workbook)
-		sheet = wb.self.account_name
+		sheet = wb[self.account_name]
 		self.entryNumber = entryNumber
 		# Update the description
 		sheet['A' + str(self.entryNumber)] = datetime.datetime(year, month, day)
 		sheet['A' + str(self.entryNumber)].number_format
-		wb.geuss_types= True
+		wb.geuss_types = True
 
 		wb.save(self.workbook)
 
 	def updateTransaction_Category(self, entryNumber, category):
 		wb = load_workbook(self.workbook)
-		sheet = wb.self.account_name
+		sheet = wb[self.account_name]
 		self.entryNumber = entryNumber
 		# Update the description
 		sheet['B' + str(self.entryNumber)] = category
@@ -109,7 +109,7 @@ class Transaction:
 
 	def updateTransaction_amount(self, entryNumber, amount):
 		wb = load_workbook(self.workbook)
-		sheet = wb.self.account_name
+		sheet = wb[self.account_name]
 		self.entryNumber = entryNumber
 		# Update the description
 		sheet['C' + str(self.entryNumber)] = amount
@@ -118,7 +118,7 @@ class Transaction:
 
 	def updateTransaction_checknum(self,entryNumber, checknum):
 		wb = load_workbook(self.workbook)
-		sheet = wb.self.account_name
+		sheet = wb[self.account_name]
 		self.entryNumber = entryNumber
 		# Update the description
 		sheet['D' + str(self.entryNumber)] = checknum
@@ -127,7 +127,7 @@ class Transaction:
 
 	def updateTransaction_desc(self, entryNumber, desc):
 		wb = load_workbook(self.workbook)
-		sheet = wb.self.account_name
+		sheet = wb[self.account_name]
 		self.entryNumber = entryNumber
 		# Update the description
 		sheet['E' + str(self.entryNumber)] = desc
