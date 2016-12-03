@@ -36,7 +36,7 @@ def main():
 		print("\t\t Welcome to Python Accountant!\n")
 		print("What Would you like to do today? \n")
 		#Menu
-		print("You are Curently Editing the " + account.account_Name + " Account in the " + account.workbook_name +" workbook.\n\n")
+		print("You are Curently Editing the " + "/ " + account.account_Name +" /" +" Account in the " + account.workbook_name +" workbook.\n\n")
 		print("\t\t Main Menu \n")
 		print("\t 1 : \t Create a New Budget \n")
 		print("\t 2 : \t Create a New Account (Must have an existing Workbook) \n")
@@ -54,13 +54,15 @@ def main():
 			worksheet = input("Enter a workseet name: ")
 			create_workbook(filename,worksheet)
 
+
 		elif option == '2':
 			print("Let's Create a new Account.\n")
 			filename = input("Enter an existing filename  (No need to include the file extnesion): ")
 			account_name =input("Enter a Account Name name: ")
 			init_balance = input("Enter the initial balance: ")
-			account = Account(account_name,filename)
-			account.create_new_Account(init_balance)
+			account = Account(account_name,filename,init_balance)
+			transaction = Transaction(filename,account_name)
+			account.create_new_Account()
 			
 
 		elif option == '3':
@@ -73,6 +75,7 @@ def main():
 			account_name = input("Please Enter an Account: ")
 			transaction = Transaction(filename,account_name)
 			account = Account(account_name,filename)
+
 
 		elif option == '3a':
 			print("Lets add an new Transaction.\n")
@@ -92,6 +95,8 @@ def main():
 			description = input()
 
 			transaction.createTransaction(int(year),int(month),int(day),category,float(amount),checknum,description)
+			account.balance_update()
+
 
 		elif option == '3b':
 			exit = False
@@ -133,12 +138,14 @@ def main():
 					entry = input("Enter the transaction number: ")
 					amount = input("Enter the new amount (Use negative for withdrawls and purchases): ")
 					transaction.updateTransaction_amount(entry,amount)
+					account.balance_update()
 
 				#Check Number
 				if suboption == '4':
 					entry = input("Enter the transaction number: ")
 					checknum = input("Enter the new Check Number: ")
 					transaction.updateTransaction_checknum(entry,checknum)
+		
 
 				#Description
 				if suboption == '5':
@@ -146,6 +153,7 @@ def main():
 					print("Enter the new description of the transaction here:\n")
 					description = input()
 					transaction.updateTransaction_desc(entry, description)
+		
 
 				if suboption == '6':
 					exit = True

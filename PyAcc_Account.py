@@ -18,15 +18,15 @@ wb = Workbook()
 
 class Account:
 
-	def __init__(self, account_Name= '(Chose an Account)' , workbook_name = '(Chose A Wokbook)'):
+	def __init__(self, account_Name= '(Chose an Account)' , workbook_name = '(Chose A Wokbook)', initial_balance = 0):
 		self.workbook_name = str(workbook_name) + '.xlsx'
 		self.account_Name = str(account_Name)
+		self.initial_balance = initial_balance
 
-	def balance_update(self, amount):
+	def balance_update(self):
 		wb = load_workbook(self.workbook_name)
 		ws = wb[self.account_Name]
-		ws['G2'] = "=SUM(C2, C" + str(transaction.checkEntries(self.workbook_name)) +")"
-		self.balance =  ws['G2'].value
+		ws['G2'] = "=SUM(C2: C" + str(transaction.checkEntries(self.workbook_name,self.account_Name)) +")"+"+" + str(self.initial_balance)
 		wb.save(self.workbook_name)
 
 	# def get_transactions(self):
@@ -38,7 +38,7 @@ class Account:
 	# 	self.transactions += [tnew]
 	# 	self.balance_update(tnew.amount)
 
-	def create_new_Account(self, initial_balance =0):
+	def create_new_Account(self):
 		#Use to create and populate a new account structure
 		wb = load_workbook(self.workbook_name)
 		wb.create_sheet(title = self.account_Name)
@@ -57,6 +57,6 @@ class Account:
 		sheet['G1'] = self.account_Name + ' Balance'
 		sheet.column_dimensions['G'].width = 25
 		wb.save(self.workbook_name)
-		sheet['G2'] = "=SUM(C2:C" + str(transaction.checkEntries(self.workbook_name,self.account_Name)) +")" + "+" + str(initial_balance)
+		sheet['G2'] = "=SUM(C2:C" + str(transaction.checkEntries(self.workbook_name,self.account_Name)) +")" + "+" + str(self.initial_balance)
 		wb.save(self.workbook_name)
 
