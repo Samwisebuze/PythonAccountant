@@ -13,18 +13,6 @@ import os
 def cls():
     os.system('cls' if os.name=='nt' else 'clear')
 
-# def main():
-# 	print("Welcome to Python Accountant!")
-# 	print("Let's create a file.")
-# 	new_filename = input("Enter a filename: ")
-# 	new_worksheetname = input("Enter a worksheet name: ")
-# 	PyAcc.create_workbook(new_filename, new_worksheetname)
-# 	print("Open the file and see if it worked.")
-
-
-# if __name__ == "__main__":
-# 	main()
-
 
 def main():
 	wb = Workbook()
