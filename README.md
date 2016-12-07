@@ -1,4 +1,10 @@
-# PythonAccountant
+
+
+Installation Notes:
+before running, use pip to install openpyxl
+
+
+Collaborator Notes:
 If you have any ideas for a feature/ or improvement on a feature, or anything about the project in general. Leave an issue!!
 
 Consider this the slow contact, if it's really important trying texting.
