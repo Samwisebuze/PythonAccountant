@@ -18,7 +18,7 @@ wb = Workbook()
 
 class Account:
 
-	def __init__(self, account_Name= '(Chose an Account)' , workbook_name = '(Chose A Wokbook)', initial_balance = 0):
+	def __init__(self, account_Name= '(Choose an Account)' , workbook_name = '(Choose A Workbook)', initial_balance = 0):
 		self.workbook_name = str(workbook_name) + '.xlsx'
 		self.account_Name = str(account_Name)
 		self.initial_balance = initial_balance
