@@ -39,7 +39,7 @@ class Account:
 	# 	self.balance_update(tnew.amount)
 
 	def create_new_Account(self):
-		#Use to create and populate a new account structure
+		#Use to create a new, unpopulated account structure
 		wb = load_workbook(self.workbook_name)
 		wb.create_sheet(title = self.account_Name)
 		sheet = wb[self.account_Name]
