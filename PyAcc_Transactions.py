@@ -1,6 +1,6 @@
 #########
-# Python Accounatn Header 
-# Desc: Contains Any functions or shortcut snippets used to sumplify main
+# Python Accountant Header 
+# Desc: Contains Any functions or shortcut snippets used to sumplify main, including Transaction Class Definition
 # Created By: Samuel Buzas & Elizabeth Sheetz
 #########
 import datetime
@@ -15,6 +15,8 @@ wb = Workbook()
 
 # Create Workbook
 def create_workbook(filename = "MyFirstBudget", sheet_name = "SimpleBudget"):
+	#Creates a new workbooks (i.e. a new excel file)
+	#Also creates a new workseet
 	dest_filename = filename + '.xlsx'
 	wb.active.title = sheet_name
 	wb.active['A1'] = 'Date'
@@ -30,37 +32,37 @@ def create_workbook(filename = "MyFirstBudget", sheet_name = "SimpleBudget"):
 	wb.geuss_types = True
 	wb.save(filename = dest_filename)
 
-# Create WorkSheet
-def create_worksheet(sheet_name = "Trackin Sheet", filename = "MyFirstBudget"):
-	dest_filename = filename + '.xlsx'
-	wb = load_workbook(dest_filename)
-	wb.create_sheet(sheet_name)
-	wb.save(dest_filename)
+# Create WorkSheet (did not use) (replaced with create_new_Account in PyAcc_Accountpy)
+# def create_worksheet(sheet_name = "Tracking Sheet", filename = "MyFirstBudget"):
+# 	dest_filename = filename + '.xlsx'
+# 	wb = load_workbook(dest_filename)
+# 	wb.create_sheet(sheet_name)
+# 	wb.save(dest_filename)
 
-# Create Blank Graph
-def create_table(filename = "MyFirstBudget", sheet_name = "SimpleBudget"):
-	dest_filename = filename + '.xlsx'
-	wb.active.title = sheet_name
-	wb.save(dest_filename)
+# Create Blank Graph (did not use)
+# def create_table(filename = "MyFirstBudget", sheet_name = "SimpleBudget"):
+# 	dest_filename = filename + '.xlsx'
+# 	wb.active.title = sheet_name
+# 	wb.save(dest_filename)
 
 
 
 class Transaction:
 
-
 	def __init__(self, workbook = 'Default' ,account_name = 'Default'):
 		self.workbook = workbook + '.xlsx'
 		self.account_name = str(account_name)
-		# excel isnt 0 based and row 1 is for titles
+		# excel isnt 0 based and row 1 is for titles so first entry = 2
 		self.entryNumber = 2
 	
 	# Create Entry
-	def createTransaction(self, year = 1996 , month = 12,  day = 12, category = 'None' , amount = 0.0, checknum = 'None' , desc ='Ex.This was a purcahse'):
+	def createTransaction(self, year = 1996 , month = 12,  day = 12, category = 'None' , amount = 0.0, checknum = 'None' , desc ='Ex.This was a purchase'):
 		# Load budget workbook to edit
 		wb = load_workbook(self.workbook)
-		# check that your not overwrting previous entries
 		sheet = wb[self.account_name]
-		#Alawyas start at entry 2, to prevetn massive gaps in the sheet
+		# check that you're not overwriting previous entries 
+		# i.e. find appropriate entrynumber so you add entry at end of list of previously entered transactions
+		# Always start at entry 2, to prevent massive gaps in the sheet
 		self.entryNumber = 2
 		while sheet['A'+ str(self.entryNumber)].value != None:
 			self.entryNumber += 1
@@ -77,6 +79,7 @@ class Transaction:
 		self.entryNumber += 1
 
 	def checkEntries(self,filename,account_name):
+		#returns first line in filename.account that has no transaction entered
 		wb = load_workbook(filename)
 		sheet = wb[account_name]
 		self.entryNumber = 2
@@ -87,6 +90,8 @@ class Transaction:
 
 
 	# Edit Entries
+	# In future would like to consolidate these
+		# eg. updateTransaction_bytype(self, entryNumber, datatype, newvalue) would do all the stuff they all do, and then some sort of way to customize for specific datatypes
 	def updateTransaction_Date(self, entryNumber, year, month, day):
 		wb = load_workbook(self.workbook)
 		sheet = wb[self.account_name]
@@ -133,9 +138,3 @@ class Transaction:
 		sheet['E' + str(self.entryNumber)] = desc
 
 		wb.save(self.workbook)
-
-
-
-
-
-
