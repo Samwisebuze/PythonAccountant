@@ -7,7 +7,4 @@ before running, use pip to install openpyxl
 Collaborator Notes:
 If you have any ideas for a feature/ or improvement on a feature, or anything about the project in general. Leave an issue!!
 
-Consider this the slow contact, if it's really important trying texting.
-This way we have a documented ideas and goals for planning.
-
-Create a new project for features that need to be added, and include a description with a list of what it needs to do (see Create A Table project)
+Project Description: PythonAccountant is budgeting software that utilizes the openpyxl library and excel. This software is meant to be lightweight and easy to use. The vision of the project is to create a simple and effective way for college students to manage their expense and track there spending to help promote financial literacy.
