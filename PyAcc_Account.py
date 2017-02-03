@@ -1,3 +1,9 @@
+#########
+# Python Accountant Account Class Definition
+# Desc: Contains Class definitions used in AccountantMain.py
+# Created By: Samuel Buzas & Elizabeth Sheetz
+#########
+
 from PyAcc_Transactions import *
 from openpyxl import Workbook
 
@@ -5,20 +11,16 @@ transaction = Transaction()
 wb = Workbook()
 # Use AcctClassses
 # worksheets = accounts
-# edit create worksheet to setup frrame work of blanace tracking
+# edit create worksheet to setup frame work of blanace tracking
 
-#########
-# Python Accountant Class Definitions
-# Desc: Contains Class definitions used in PyAcc.py and AccountantMain.py
-# Created By: Samuel Buzas & Elizabeth Sheetz
-#########
+
 
 
 
 
 class Account:
 
-	def __init__(self, account_Name= '(Chose an Account)' , workbook_name = '(Chose A Wokbook)', initial_balance = 0):
+	def __init__(self, account_Name= '(Choose an Account)' , workbook_name = '(Choose A Workbook)', initial_balance = 0):
 		self.workbook_name = str(workbook_name) + '.xlsx'
 		self.account_Name = str(account_Name)
 		self.initial_balance = initial_balance
@@ -39,7 +41,8 @@ class Account:
 	# 	self.balance_update(tnew.amount)
 
 	def create_new_Account(self):
-		#Use to create and populate a new account structure
+		#Use to create a new, unpopulated account structure
+		#Use when parent workbook already exists
 		wb = load_workbook(self.workbook_name)
 		wb.create_sheet(title = self.account_Name)
 		sheet = wb[self.account_Name]

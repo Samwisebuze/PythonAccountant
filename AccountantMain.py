@@ -18,10 +18,10 @@ def main():
 	wb = Workbook()
 	account = Account()
 	cls()
+	print("\t\t Welcome to Python Accountant!\n")
 
 	while True:
 		cls()
-		print("\t\t Welcome to Python Accountant!\n")
 		print("What Would you like to do today? \n")
 		#Menu
 		print("You are Curently Editing the " + "/ " + account.account_Name +" /" +" Account in the " + account.workbook_name +" workbook.\n\n")
@@ -31,21 +31,24 @@ def main():
 		print("\t 3 : \t Select a Budget and an account to work with.\n")
 		print("\t\t 3a : \t Enter a New Transaction \n")
 		print("\t\t 3b : \t Edit an Existing Transaction (Must know Transaction number (Row Number)) \n")
-		print("\t 5 : \t Exit Python Accountant  \n")
+		print("\t 8 : \t Exit Python Accountant  \n")
 
 		option = input("Please Input an option: ")
 		option = str(option)
+		
 		# Cases
+		# Create a New Budget
 		if option == '1':
 			print("Let's Create a file.\n")
 			filename = input("Enter a filename: ")
-			worksheet = input("Enter a workseet name: ")
+			worksheet = input("Enter a worksheet name: ")
 			create_workbook(filename,worksheet)
 
 
+		# Create a New Account
 		elif option == '2':
 			print("Let's Create a new Account.\n")
-			filename = input("Enter an existing filename  (No need to include the file extnesion): ")
+			filename = input("Enter an existing filename  (No need to include the file extension): ")
 			account_name =input("Enter a Account Name name: ")
 			init_balance = input("Enter the initial balance: ")
 			account = Account(account_name,filename,init_balance)
@@ -53,6 +56,7 @@ def main():
 			account.create_new_Account()
 			
 
+		# Select a Budget and an account to work with
 		elif option == '3':
 			print("What workbook would you like to work with?\n")
 			filename = input("Enter A Filename: ")
@@ -64,10 +68,10 @@ def main():
 			transaction = Transaction(filename,account_name)
 			account = Account(account_name,filename)
 
-
+		# Enter a New Transaction
 		elif option == '3a':
 			print("Lets add an new Transaction.\n")
-			# year,month,day,categroy,amount,checknum,desc
+			# year,month,day,category,amount,checknum,desc
 			# Date
 			print("What is the Date of the Transaction?\n")
 			year = input("Enter the Year: ")
@@ -75,7 +79,7 @@ def main():
 			day = input("Enter the Day: ")
 
 			print("How much was the transaction?\n Does it have a category?\n")
-			amount = input("Enter the amount (Use negative for withdrawls and purchases): ")
+			amount = input("Enter the amount (Use negative for withdrawals and purchases): ")
 			category = input("Enter the Category: ")
 
 			checknum = input("If you used a check, please enter the check number here (Otherwise leave blank): ")
@@ -86,6 +90,7 @@ def main():
 			account.balance_update()
 
 
+		#Edit an Existing Transaction
 		elif option == '3b':
 			exit = False
 			#Sub-Menu
@@ -97,8 +102,8 @@ def main():
 				print("You are Curently Editing the " + account.account_Name + " Account in the " + account.workbook_name +" workbook.\n\n")
 				print("\t\t Transaction Edit Menu \n")
 				print("\t 1: \t Update the Date\n")
-				print("\t 2: \t Update the Categroy\n")
-				print("\t 3: \t Update the amount\n")
+				print("\t 2: \t Update the Category\n")
+				print("\t 3: \t Update the Amount\n")
 				print("\t 4: \t Update the Check Number\n")
 				print("\t 5: \t Update the Description\n")
 				print("\t 6: \t Back to Main Menu\n")
@@ -109,7 +114,7 @@ def main():
 				#Date
 				if suboption == '1':
 					entry = input("Enter the transaction number: ")
-					print("What is the  new Date of the Transaction?\n")
+					print("What is the new date of the transaction?\n")
 					year = input("Enter the Year: ")
 					month = input("Enter the Month: ")
 					day = input("Enter the Day: ")
@@ -149,7 +154,7 @@ def main():
 
 
 
-		elif option == '5':
+		elif option == '8':
 			print("Thank you for chosing Python Accountant for you budgeting needs!\n\n\n")
 			print("( *A*,)/\n\n\n")
 			time.sleep(2)
