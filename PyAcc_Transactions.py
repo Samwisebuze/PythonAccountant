@@ -1,5 +1,5 @@
 #########
-# Python Accounatn Header 
+# Python Accounatn Header
 # Desc: Contains Any functions or shortcut snippets used to sumplify main
 # Created By: Samuel Buzas & Elizabeth Sheetz
 #########
@@ -14,8 +14,7 @@ from openpyxl import load_workbook
 wb = Workbook()
 
 # Create Workbook
-def create_workbook(filename = "MyFirstBudget", sheet_name = "SimpleBudget"):
-	dest_filename = filename + '.xlsx'
+def create_workbook(filename = "MyFirstBudget" + '.xlsx', sheet_name = "SimpleBudget"):
 	wb.active.title = sheet_name
 	wb.active['A1'] = 'Date'
 	wb.active.column_dimensions['A'].width = 17
@@ -28,32 +27,31 @@ def create_workbook(filename = "MyFirstBudget", sheet_name = "SimpleBudget"):
 	wb.active['E1'] = 'Description'
 	wb.active.column_dimensions['E'].width = 50
 	wb.geuss_types = True
-	wb.save(filename = dest_filename)
+	wb.save(filename)
 
 # Create WorkSheet
-def create_worksheet(sheet_name = "Trackin Sheet", filename = "MyFirstBudget"):
-	dest_filename = filename + '.xlsx'
-	wb = load_workbook(dest_filename)
+def create_worksheet(sheet_name = "Trackin Sheet", filename = "MyFirstBudget"+ '.xlsx'):
+
+	wb = load_workbook(filename)
 	wb.create_sheet(sheet_name)
-	wb.save(dest_filename)
+	wb.save(filename)
 
 # Create Blank Graph
-def create_table(filename = "MyFirstBudget", sheet_name = "SimpleBudget"):
-	dest_filename = filename + '.xlsx'
+def create_table(filename = "MyFirstBudget"+'.xlsx', sheet_name = "SimpleBudget"):
 	wb.active.title = sheet_name
-	wb.save(dest_filename)
+	wb.save(filename)
 
 
 
 class Transaction:
 
 
-	def __init__(self, workbook = 'Default' ,account_name = 'Default'):
-		self.workbook = workbook + '.xlsx'
+	def __init__(self, workbook = 'Default'+'.xlsx',account_name = 'Default'):
+		self.workbook = workbook
 		self.account_name = str(account_name)
 		# excel isnt 0 based and row 1 is for titles
 		self.entryNumber = 2
-	
+
 	# Create Entry
 	def createTransaction(self, year = 1996 , month = 12,  day = 12, category = 'None' , amount = 0.0, checknum = 'None' , desc ='Ex.This was a purcahse'):
 		# Load budget workbook to edit
@@ -133,9 +131,3 @@ class Transaction:
 		sheet['E' + str(self.entryNumber)] = desc
 
 		wb.save(self.workbook)
-
-
-
-
-
-
